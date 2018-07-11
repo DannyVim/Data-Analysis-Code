@@ -13,11 +13,11 @@ rbind()
 #排序
 order(var, na.last = TRUE, decreasing = FALSE)
 #可以输入多个var，用正负号表示升降序
-order(+var, -var, ...)
+order(+var,-var, ...)
 #order生成的位置向量保存下来
 ord <- order(...)
 #也可以将排序结果保存下来
-ord_var <- data[ord,]
+ord_var <- data[ord, ]
 
 #缺失数据
 ##缺失
@@ -26,10 +26,10 @@ is.na()
 is.nan()
 ###其返回的都是逻辑型向量
 m <- is.na(data$var)
-data[m,] #现实var值为na的样本
+data[m, ] #现实var值为na的样本
 ##矩阵或数据框中的数据
 m <- complete.cases(...)
-data[!m,] #!m表示取反，因为m中完整的为TRUE
+data[!m, ] #!m表示取反，因为m中完整的为TRUE
 ##生成缺失数据报告
 library(mice)
 md.pattern(data)
@@ -43,9 +43,12 @@ Recode()
 
 #数据筛选
 ##条件筛选
-subset(data,condition)
+subset(data, condition)
 ##随机抽样
 ###抽样结果复现则需要设定随机种子
 set.seed(1000)
 ###prob可以设定var向量中各元素被抽中的概率
-sample(var, size = ,prob = c(),replace = FALSE)
+sample(var,
+       size = ,
+       prob = c(),
+       replace = FALSE)
