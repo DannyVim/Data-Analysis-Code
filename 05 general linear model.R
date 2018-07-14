@@ -38,7 +38,8 @@ library("car")
 #### qqplot函数提供了更为精确的正态假设检验方法
 qqPlot(fit)
 #### 误差项的独立性假定（针对时间序列）
-durbinWatsonTest(fit)    
+durbinWatsonTest(fit)
+dwt(fit)
 #### 误差项不满足正态性
 summary(powerTransform(y))   #BOX-COX，非正态性处理
 #### 误差项等方差性假定
@@ -50,6 +51,19 @@ crPlot(fit, one.page = TRUE, ask = FALSE)
 library(gvlma)
 gvmodel <- gvlma(fit)
 summary(gvmodel)
+
+### 非正态性（Shapiro-Wilk test） -> 对y进行变换
+shapiro.test(fit$residuals) #p-value很小，说明残差不具备正态性
+### 非线性 -> 对变量进行变换
+plot(fit$residuals) # 残差图中没有规律性存在，不存在趋势
+### 异方差同上，看残差图，是否随机分布在两侧 -> 加权最小二乘
+library(lmtest)
+bptest(fit) # 原假设为等方差
+library(nlme)
+glsfit <- gls(formula,weights = varFixed(~vars)) #不明确残差与x的关系，可以通过迭代反复尝试
+### 非独立性-自相关 -> 广义最小二乘
+dwtest(fit)
+glsfit <- gls(formula, corr=corAR1())
 
 ## 回归诊断数据异常点
 ### 定义绘制杠杆值的用户自定义函数
