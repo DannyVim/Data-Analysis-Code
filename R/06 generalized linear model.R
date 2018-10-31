@@ -5,7 +5,7 @@
 ### 如果无法确定分布，则使用准极大似然估计:quasi,quasibinomial,quaipoisson
 ## link用以指定对应分布的连接函数
 ### logistic = logit; gaussian = identity（此时，广义线性模型既为一般线性模型）;poisson=log
-fit <- glm(formula, family = binominal(link='logit'))
+fit <- glm(formula, family = binomial(link='logit'))
 anova(fit,test='Chisq') #根据卡方分布进行回归方程的显著性检验
 summary(fit) #会附上wald检验结果
 exp(coef(fit)) #直接给出优势比的比值 哈哈哈
