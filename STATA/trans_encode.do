@@ -1,4 +1,4 @@
-unicode analyze filespec
+unicode analyze *.dta
 
 unicode enc list
 
